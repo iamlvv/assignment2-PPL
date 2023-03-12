@@ -78,7 +78,7 @@ ML_COMMENT: '/*' .*? '*/' -> skip ;
 
 arraytype: ARRAY LS dimensions RS OF atomictype;
 
-dimensions: INTLIT (COMMA INTLIT)*;
+dimensions: INTLIT COMMA dimensions | INTLIT;
 
 atomictype: INTEGER | BOOLEAN | FLOAT | STRING;
 
@@ -94,7 +94,7 @@ expr4: expr4 (MULOP | DIVOP | MODOP) expr5 | expr5;
 expr5: (NOTOP) expr5 | expr6;
 expr6: (SUBOP) expr6 | expr7;
 expr7: INTLIT | FLOATLIT | BOOLLIT | STRINGLIT 
-| IDENTIFIER | exprindex | IDENTIFIER LP exprlist RP | LP expr RP | arraylit;
+| IDENTIFIER | exprindex | (IDENTIFIER LP exprlist RP) | (LP expr RP) | arraylit;
 exprindex: IDENTIFIER LS exprlist RS;
 
 
@@ -213,7 +213,7 @@ fragment SAFECODEPOINT
 
 
 //ARRAYLIT: [{] INTLIT ([,] INTLIT)* [}] | [{] FLOATLIT ([,] FLOATLIT)* [}] | [{] BOOLLIT ([,] BOOLLIT)* [}] | [{] STRINGLIT ([,] STRINGLIT)* [}] | [{] [}];
-arraylit: '{' exprlist '}' | emptycurl;
+arraylit: '{' (exprlist | emptycurl) '}';
 //BOOLEAN_TYPE: ;
 //Keywords:
 AUTO: A U T O;

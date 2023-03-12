@@ -149,7 +149,7 @@ class ArrayLit(Expr):
         self.explist = explist
 
     def __str__(self):
-        return "ArrayLit([{}])".format(", ".join([self.visit(exp) for exp in self.explist]))
+        return "ArrayLit([{}])".format(", ".join([str(exp) for exp in self.explist]))
 
 
 class FuncCall(Expr):
