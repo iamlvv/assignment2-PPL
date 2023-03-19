@@ -1,0 +1,3 @@
+Program([
+	FuncDecl(JER, VoidType, [Param(X, IntegerType)], None, BlockStmt([BlockStmt([]), AssignStmt(Id(emotion), BinExpr(::, StringLit(haizz), BinExpr(+, StringLit(hihi), StringLit(huhu))))]))
+])

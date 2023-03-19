@@ -1,0 +1,3 @@
+Program([
+	VarDecl(dope, ArrayType([3, 102], StringType), ArrayLit([IntegerLit(1), ArrayLit([FloatLit(5.6e-34)]), IntegerLit(4)]))
+])

@@ -1,0 +1,1 @@
+__C__: array[7] of float = germanyTOM(jK[""::{""}]);

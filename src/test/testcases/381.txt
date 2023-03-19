@@ -1,0 +1,6 @@
+nestedIf: function boolean(bool: boolean) {
+                if (true) 
+                    if (10 == 4 + 5) UwU = U::U;
+                    else print(UwU);
+                else {}
+                }

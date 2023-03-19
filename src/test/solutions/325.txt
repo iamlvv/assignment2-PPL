@@ -1,0 +1,3 @@
+Program([
+	VarDecl(name, StringType, BinExpr(::, StringLit(helloguys), ArrayCell(WorldwideWeb, [IntegerLit(5), IntegerLit(17)])))
+])

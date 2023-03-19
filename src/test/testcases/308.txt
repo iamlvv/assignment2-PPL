@@ -1,0 +1,7 @@
+main: function void () {
+                while (true) {
+                    x: integer;
+                    x = x + 1;
+                    return x;
+                }
+            }

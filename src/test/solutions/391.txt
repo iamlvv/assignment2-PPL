@@ -1,0 +1,5 @@
+Program([
+	VarDecl(x, IntegerType, IntegerLit(10))
+	VarDecl(y, IntegerType, IntegerLit(25))
+	FuncDecl(sum, IntegerType, [Param(x, IntegerType), Param(y, IntegerType)], None, BlockStmt([VarDecl(z, IntegerType, BinExpr(+, Id(x), Id(y))), CallStmt(print, StringLit(sum of x+y =), Id(z)), ReturnStmt(Id(z))]))
+])

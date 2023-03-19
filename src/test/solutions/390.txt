@@ -1,0 +1,5 @@
+Program([
+	VarDecl(sum, IntegerType, IntegerLit(0))
+	VarDecl(avg, FloatType, FloatLit(0.0))
+	VarDecl(grade, ArrayType([1], IntegerType), ArrayLit([FloatLit(8000.0), IntegerLit(9), IntegerLit(0), UnExpr(-, IntegerLit(6))]))
+])

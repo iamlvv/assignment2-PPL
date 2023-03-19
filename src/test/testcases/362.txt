@@ -1,0 +1,22 @@
+main: function string (start: array [10] of integer, end: integer) {
+                    size, i, j,p : integer;
+                    size = end - start;
+                    i = 1;
+                    j = size - 1;
+                    p = start[0];
+                    while (true)
+                    {
+                        while (start[i] < p)
+                            if (i == size - 1)
+                                break;
+                        while (start[j] > p)
+                            if (j == 0)
+                                break;
+                        if (i >= j) 
+                            break;
+                        swap(start[i], start[j]);
+                    }
+                    swap(start[0], start[j]);
+                    return start[j];
+                }
+                

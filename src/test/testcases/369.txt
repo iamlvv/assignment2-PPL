@@ -1,0 +1,1 @@
+a: integer = a*1.2E-9;

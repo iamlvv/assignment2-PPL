@@ -1,0 +1,6 @@
+func: function void() {
+                for (idx[1]=2_1,7==(4>5),--i) {
+                    arr:array[3_1,0] of string;
+                    arr[idx[i]] = arr[idx[i]]::"jdk";
+                    }
+                }

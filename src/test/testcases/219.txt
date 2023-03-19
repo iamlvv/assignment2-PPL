@@ -1,0 +1,5 @@
+fact: function integer (n: integer) {
+            foo(2+x, 4.0/y);
+            goo();
+            super(2 * x, (2+3) /2 % 3 == 21);
+            }

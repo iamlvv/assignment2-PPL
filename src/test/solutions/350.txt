@@ -1,0 +1,4 @@
+Program([
+	VarDecl(x, ArrayType([2], FloatType))
+	FuncDecl(a, IntegerType, [InheritOutParam(abc, IntegerType)], None, BlockStmt([AssignStmt(Id(x), IntegerLit(11)), AssignStmt(ArrayCell(b, [ArrayCell(c, [BinExpr(==, IntegerLit(2), IntegerLit(2))])]), IntegerLit(4)), CallStmt(foo, Id(x))]))
+])

@@ -1,0 +1,17 @@
+
+        main: function void (x: integer, a_123: string) {
+            i: integer =0;
+            {
+                {
+                    a[1+foo(2)] = 5 + 3 + 2 * 2;
+                    while (x > 1) {
+                        for (i = 3.2_0_2,,) {
+                            a[0] = 23;
+                            i = i + 1;
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+        

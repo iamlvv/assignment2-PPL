@@ -1,0 +1,7 @@
+
+        main: function void (x: integer, a_123: string) {
+            i: integer =0;
+            a[3+foo(2)] = a[b[2/3]]+4;
+            x[1_2_3] = {1,2,{1,2}};
+            d= e[foo(2)+a[5]*foo(2)];
+        }

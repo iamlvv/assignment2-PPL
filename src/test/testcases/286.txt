@@ -1,0 +1,4 @@
+adj_Idnex: function auto(x: array[0] of string) {
+                break;
+                foo(t[a][_8] / 5);
+                }

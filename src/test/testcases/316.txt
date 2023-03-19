@@ -1,0 +1,5 @@
+_45_0: function auto () {
+                return arr[5_6,1.];
+                if (n == 0) return 1;
+                else return (n - 1) + fact(n + 2);
+                }

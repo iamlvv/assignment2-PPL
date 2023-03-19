@@ -1,0 +1,3 @@
+Program([
+	FuncDecl(sendFile, VoidType, [Param(file, StringType), Param(path, StringType)], None, BlockStmt([CallStmt(sendFile, BinExpr(::, Id(path), BinExpr(::, StringLit(//), Id(file)))), ReturnStmt(BinExpr(::, Id(path), BinExpr(::, StringLit(//), Id(file))))]))
+])

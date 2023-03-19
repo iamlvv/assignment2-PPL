@@ -1,0 +1,21 @@
+
+        main: function void (x: integer, a_123: string) {
+            i: integer =0;
+            {
+                {
+                    a[1+foo(2)] = 5 + 3 + 2 * 2;
+                    while (x > 1) {
+                        do {
+                            while (n < 1) {
+                                for (i = 3.2_0_2, i < 10, i+2) {
+                                    return;
+                                }
+                            }
+                        }
+                        while (x > 1);
+                        i = i + 1;
+                    }
+                }
+            }
+        }
+        

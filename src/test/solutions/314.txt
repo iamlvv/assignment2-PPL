@@ -1,0 +1,3 @@
+Program([
+	FuncDecl(fact, IntegerType, [Param(n, IntegerType)], None, BlockStmt([CallStmt(foo, BinExpr(+, IntegerLit(2), Id(x)), BinExpr(/, FloatLit(4.0), Id(y))), CallStmt(goo, ), CallStmt(super, BinExpr(*, IntegerLit(2), Id(x)), BinExpr(==, BinExpr(%, BinExpr(/, BinExpr(+, IntegerLit(2), IntegerLit(3)), IntegerLit(2)), IntegerLit(3)), IntegerLit(21)))]))
+])

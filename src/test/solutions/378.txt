@@ -1,0 +1,3 @@
+Program([
+	FuncDecl(lexer, VoidType, [], None, BlockStmt([VarDecl(parser, IntegerType, FuncCall(getAge, [])), VarDecl(x, IntegerType, FuncCall(getName, [])), AssignStmt(Id(age), FuncCall(getAge, [])), ReturnStmt(Id(age))]))
+])

@@ -1,0 +1,3 @@
+fact: function float(x: array[7] of string) {
+                if (2<3) return a[x[y]];
+                }

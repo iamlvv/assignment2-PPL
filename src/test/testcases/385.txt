@@ -1,0 +1,4 @@
+VANVY: function auto() {
+                while(id[x]::str == 7)
+                    return id[x];
+                }

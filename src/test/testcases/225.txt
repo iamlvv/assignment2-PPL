@@ -1,0 +1,7 @@
+_45_0: function auto () {
+                return arr[5_6,1., "helloBK"];
+                do {
+                    helloworld(2);
+                }
+                while (n * 2 == 1)
+                }

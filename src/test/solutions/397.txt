@@ -1,0 +1,3 @@
+Program([
+	FuncDecl(fact, IntegerType, [Param(n, IntegerType)], None, BlockStmt([BlockStmt([VarDecl(func, IntegerType, IntegerLit(123))])]))
+])

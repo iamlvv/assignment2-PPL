@@ -1,0 +1,10 @@
+
+        main: function void (x: integer, a_123: string) {
+            i: integer =0;
+            {
+                {
+                    a[1+foo(2)] = while (x > 1) return -1;
+                }
+            }
+        }
+        

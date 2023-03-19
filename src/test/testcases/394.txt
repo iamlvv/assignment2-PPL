@@ -1,0 +1,5 @@
+func: function void() {
+                while(true + false / bool) {
+                    x: boolean;
+                }
+                }

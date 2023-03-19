@@ -30,7 +30,8 @@ vardec: ((idlist COLON typ) | subvardec) SEMICOLON;
 subvardec: IDENTIFIER COMMA subvardec COMMA expr | expand;
 expand: IDENTIFIER COLON typ ASSIGNOP expr;
 idlist: IDENTIFIER COMMA idlist | IDENTIFIER;
-exprlist: expr COMMA exprlist | expr | ;
+exprlist: subexprlist | ;
+subexprlist: expr COMMA subexprlist | expr;
 
 
 //Function declaration:
@@ -93,66 +94,65 @@ expr3: expr3 (ADDOP | SUBOP) expr4 | expr4;
 expr4: expr4 (MULOP | DIVOP | MODOP) expr5 | expr5;
 expr5: (NOTOP) expr5 | expr6;
 expr6: (SUBOP) expr6 | expr7;
-expr7: INTLIT | FLOATLIT | BOOLLIT | STRINGLIT 
-| IDENTIFIER | exprindex | (IDENTIFIER LP exprlist RP) | (LP expr RP) | arraylit;
-exprindex: IDENTIFIER LS exprlist RS;
+expr7: literal | IDENTIFIER | exprindex | (IDENTIFIER LP exprlist RP) | (LP expr RP);
+exprindex: IDENTIFIER LS subexprlist RS;
 
 
 //Special functions
 
 
 //Alphabet characters:
-fragment A: ('a' | 'A');
+fragment A: ('a');
 
-fragment B: ('b' | 'B');
+fragment B: ('b');
 
-fragment C: ('c' | 'C');
+fragment C: ('c');
 
-fragment D: ('d' | 'D');
+fragment D: ('d');
 
-fragment E: ('e' | 'E');
+fragment E: ('e');
 
-fragment F: ('f' | 'F');
+fragment F: ('f');
 
-fragment G: ('g' | 'G');
+fragment G: ('g');
 
-fragment H: ('h' | 'H');
+fragment H: ('h');
 
-fragment I: ('i' | 'I');
+fragment I: ('i');
 
-fragment J: ('j' | 'J');
+fragment J: ('j');
 
-fragment K: ('k' | 'K');
+fragment K: ('k');
 
-fragment L: ('l' | 'L');
+fragment L: ('l');
 
-fragment M: ('m' | 'M');
+fragment M: ('m');
 
-fragment N: ('n' | 'N');
+fragment N: ('n');
 
-fragment O: ('o' | 'O');
+fragment O: ('o');
 
-fragment P: ('p' | 'P');
+fragment P: ('p');
 
-fragment Q: ('q' | 'Q');
+fragment Q: ('q');
 
-fragment R: ('r' | 'R');
+fragment R: ('r');
 
-fragment S: ('s' | 'S');
+fragment S: ('s');
 
-fragment T: ('t' | 'T');
+fragment T: ('t');
 
-fragment U: ('u' | 'U');
+fragment U: ('u');
 
-fragment V: ('v' | 'V');
+fragment V: ('v');
 
-fragment W: ('w' | 'W');
+fragment W: ('w');
 
-fragment X: ('x' | 'X');
+fragment X: ('x');
 
-fragment Y: ('y' | 'Y');
+fragment Y: ('y');
 
-fragment Z: ('z' | 'Z');
+fragment Z: ('z');
 
 
 

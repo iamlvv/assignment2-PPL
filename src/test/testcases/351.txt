@@ -1,0 +1,11 @@
+
+        x: auto;
+        a: function integer (inherit out n: integer){
+           if (n == 0) return 1;
+            else return n * a(n - 1); 
+        }
+        main: function void (x: integer)
+        {
+            x=11;
+            foo(x);
+        }

@@ -1,0 +1,5 @@
+control: function void() inherit Mixi{
+                break;
+                continue;
+                return;
+                }

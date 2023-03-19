@@ -1,0 +1,8 @@
+main: function array [20,20] of integer (a: array [110,110] of integer, out b: array [10,10] of integer, r: integer, c: integer ) {
+                    for (i = 0, i < r, 1) 
+                        for (j = 0, j < c, 1)
+                            b[j,i] = a[i,j];
+                    return b;
+                    /*This is the comment*/
+                }
+                

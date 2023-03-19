@@ -1,0 +1,3 @@
+Program([
+	FuncDecl(F, AutoType, [], None, BlockStmt([AssignStmt(ArrayCell(dict, [BinExpr(+, ArrayCell(pair, [IntegerLit(1)]), ArrayCell(pair, [IntegerLit(0)]))]), BinExpr(/, FloatLit(7e-09), IntegerLit(3))), ReturnStmt(ArrayCell(dict, [FloatLit(2.0)]))]))
+])

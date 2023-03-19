@@ -1,0 +1,8 @@
+ main: function void() {
+                        if (a == b) {
+                            
+                        }
+                        else {
+                            if (10 == 5) {}
+                        }
+                    } 

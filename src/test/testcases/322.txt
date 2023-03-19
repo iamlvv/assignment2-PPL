@@ -1,0 +1,3 @@
+getName: function string (inherit out x:array[2_1,8] of float) {
+                return;
+                }

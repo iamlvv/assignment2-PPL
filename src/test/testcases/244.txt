@@ -1,0 +1,3 @@
+arr[4_5,0]: function void () inherit getName {
+                return {};
+                }

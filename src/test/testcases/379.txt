@@ -1,0 +1,3 @@
+main: function void(arr: array[1,2] of string) {
+                if (str::str) if (7 - 4 ==-3) return; else break;
+                }

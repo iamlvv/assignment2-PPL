@@ -1,0 +1,5 @@
+lexer: function void() {
+                parser, x: integer = getAge(), getName();
+                age = getAge();
+                return age;
+                }

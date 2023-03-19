@@ -1,0 +1,4 @@
+JER: function void(X: integer) {
+                {}
+                emotion = "haizz"::"hihi" + "huhu";
+                }

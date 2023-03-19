@@ -1,0 +1,12 @@
+fact: function integer (n: integer) {
+            continue;
+            printInteger(3__12);
+            goo(1, 2, 3);
+            {
+                r,s: integer;
+                r = 2.0;
+                a,b: array [5] of integer;
+                s = r * r * a;
+                a[0] = s;
+            }
+            }

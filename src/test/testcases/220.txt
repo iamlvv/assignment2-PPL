@@ -1,0 +1,8 @@
+fact: function integer (n: integer) {
+            while (n == 10 || n == 20 && n == 30) {
+                    delta: integer = fact(3);
+                    inc(x, delta, alpha);
+                    do printHello();
+                    while (1 + 4 == 2);
+                }
+            }

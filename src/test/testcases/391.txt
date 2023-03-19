@@ -1,0 +1,6 @@
+ x, y: integer = 10, 25;
+                    sum: function integer(x: integer, y: integer){
+                            z: integer = x+y;
+                            print ("sum of x+y =", z);
+                            return z;
+                        }

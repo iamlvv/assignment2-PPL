@@ -1,0 +1,5 @@
+a: integer =1 ;
+        b: array [2] of integer = {{2,3,4},{4,5,6}};
+        a,b : float;
+        a, b : array [2] of integer= {1,2},{   2   ,   3   };
+                

@@ -1,0 +1,3 @@
+Program([
+	FuncDecl(main, VoidType, [Param(x, BooleanType)], None, BlockStmt([IfStmt(BinExpr(::, BinExpr(||, BooleanLit(True), StringLit()), ArrayLit([BinExpr(+, StringLit(), Id(str))])), ContinueStmt())]))
+])

@@ -6,16 +6,12 @@ from AST import *
 class ASTGeneration(MT22Visitor):
     #program: decclist EOF;
     def visitProgram(self, ctx: MT22Parser.ProgramContext):
-        result = []
-        for decllist in ctx.decllist():
-            result.append(self.visit(decllist))
-        return Program(result)
+        return Program(self.visit(ctx.decllist()))
     
     #decllist: declaration decllist | declaration;
     def visitDecllist(self, ctx: MT22Parser.DecllistContext):
-        if ctx.getChildCount() == 0: return []
-        elif ctx.declaration(): return [self.visit(ctx.declaration())]
-        return [self.visit(ctx.declaration()) + self.visit(ctx.decllist())]
+        if ctx.getChildCount() == 1: return self.visit(ctx.declaration())
+        return self.visit(ctx.declaration()) + self.visit(ctx.decllist())
     
     #declaration: vardec | funcdec;
     def visitDeclaration(self, ctx: MT22Parser.DeclarationContext):
@@ -30,34 +26,56 @@ class ASTGeneration(MT22Visitor):
     
     #vardec: ((idlist COLON typ) | subvardec) SEMICOLON;
     def visitVardec(self, ctx: MT22Parser.VardecContext):
-        if ctx.idlist(): return VarDecl(Id(ctx.idlist().getText()), self.visit(ctx.typ()))
-        elif ctx.subvardec(): return self.visit(ctx.subvardec())
-    
+        if ctx.COLON(): 
+            idlist = self.visit(ctx.idlist())
+            return [VarDecl(i, self.visit(ctx.typ())) for i in idlist]
+        elif ctx.subvardec():
+            sublist = self.visit(ctx.subvardec())
+            response = []
+            for i in range(len(sublist)):
+                subvardec = VarDecl(sublist[i][0], sublist[i][1], sublist[(len(sublist)-1) - i][2])
+                response += [subvardec]
+            return response
+        
     #subvardec: IDENTIFIER COMMA subvardec COMMA expr | expand;
     def visitSubvardec(self, ctx: MT22Parser.SubvardecContext):
         if ctx.getChildCount() == 5:
-            return self.visit(ctx.subvardec()) + self.visit(ctx.expr())
+            list = self.visit(ctx.subvardec())
+            typ = list[-1][1]
+            return [(ctx.IDENTIFIER().getText(), typ, self.visit(ctx.expr()))] + list
         return self.visit(ctx.expand())
     
     #expand: IDENTIFIER COLON typ ASSIGNOP expr;
     def visitExpand(self, ctx: MT22Parser.ExpandContext):
-        return self.visit(ctx.typ()) + self.visit(ctx.expr())
+        return [(ctx.IDENTIFIER().getText(), self.visit(ctx.typ()), self.visit(ctx.expr()))]
 
     #idlist: IDENTIFIER COMMA idlist | IDENTIFIER;
     def visitIdlist(self, ctx: MT22Parser.IdlistContext):
-        if ctx.getChildCount() == 1: return Id(ctx.IDENTIFIER().getText())
-        return Id(ctx.IDENTIFIER().getText()) + self.visit(ctx.idlist())
+        if ctx.getChildCount() == 1: return [(ctx.IDENTIFIER().getText())]
+        return [(ctx.IDENTIFIER().getText())] + self.visit(ctx.idlist())
     
-    #exprlist: expr COMMA exprlist | expr |;
+    # exprlist: subexprlist | ;
     def visitExprlist(self, ctx: MT22Parser.ExprlistContext):
         if ctx.getChildCount() == 0: return []
-        elif ctx.getChildCount() == 1: return [self.visit(ctx.expr())]
-        return [self.visit(ctx.expr())] + self.visit(ctx.exprlist())
+        return self.visit(ctx.subexprlist())
+    
+    #subexprlist: expr COMMA subexprlist | expr;
+    def visitSubexprlist(self, ctx: MT22Parser.SubexprlistContext):
+        if ctx.getChildCount() == 1: return [self.visit(ctx.expr())]
+        return [self.visit(ctx.expr())] + self.visit(ctx.subexprlist())
     
     #funcdec: IDENTIFIER COLON FUNCTION (typ | VOID) LP parameterlist RP (INHERIT IDENTIFIER)? (blockstate | emptycurl);
     def visitFuncdec(self, ctx: MT22Parser.FuncdecContext):
-        if ctx.typ(): return FuncDecl(Id(ctx.IDENTIFIER().getText()), self.visit(ctx.typ()), self.visit(ctx.parameterlist()), self.visit(ctx.IDENTIFIER()), self.visit(ctx.blockstate()))
-        elif ctx.VOID(): return FuncDecl(Id(ctx.IDENTIFIER().getText()), VoidType(), self.visit(ctx.parameterlist()), self.visit(ctx.IDENTIFIER()), self.visit(ctx.blockstate()))
+        if ctx.typ(): 
+            if ctx.INHERIT():
+                return [FuncDecl(ctx.IDENTIFIER(0).getText(), self.visit(ctx.typ()), self.visit(ctx.parameterlist()), ctx.IDENTIFIER(1).getText(), self.visit(ctx.blockstate()))]
+            else:
+                return [FuncDecl(ctx.IDENTIFIER(0).getText(), self.visit(ctx.typ()), self.visit(ctx.parameterlist()), None, self.visit(ctx.blockstate()))]
+        elif ctx.VOID(): 
+            if ctx.INHERIT():
+                return [FuncDecl(ctx.IDENTIFIER(0).getText(), VoidType(), self.visit(ctx.parameterlist()), ctx.IDENTIFIER(1).getText(), self.visit(ctx.blockstate()))]
+            else:
+                return [FuncDecl(ctx.IDENTIFIER(0).getText(), VoidType(), self.visit(ctx.parameterlist()), None, self.visit(ctx.blockstate()))]
         
     #emptycurl: LC RC;
     def visitEmptycurl(self, ctx: MT22Parser.EmptycurlContext):
@@ -67,12 +85,12 @@ class ASTGeneration(MT22Visitor):
     def visitParameter(self, ctx: MT22Parser.ParameterContext):
         if ctx.INHERIT():
             if ctx.OUT():
-                return [ParamDecl(Id(ctx.IDENTIFIER().getText()), self.visit(ctx.typ()), True, True)]
-            else: return [ParamDecl(Id(ctx.IDENTIFIER().getText()), self.visit(ctx.typ()), True, False)]
+                return [ParamDecl((ctx.IDENTIFIER().getText()), self.visit(ctx.typ()), True, True)]
+            else: return [ParamDecl((ctx.IDENTIFIER().getText()), self.visit(ctx.typ()), False, True)]
         else:
             if ctx.OUT():
-                return [ParamDecl(Id(ctx.IDENTIFIER().getText()), self.visit(ctx.typ()), False, True)]
-            else: return [ParamDecl(Id(ctx.IDENTIFIER().getText()), self.visit(ctx.typ()), False, False)]
+                return [ParamDecl((ctx.IDENTIFIER().getText()), self.visit(ctx.typ()), True, False)]
+            else: return [ParamDecl((ctx.IDENTIFIER().getText()), self.visit(ctx.typ()), False, False)]
     
     #parameterlist: parameter COMMA parameterlist | parameter |;
     def visitParameterlist(self, ctx: MT22Parser.ParameterlistContext):
@@ -82,12 +100,12 @@ class ASTGeneration(MT22Visitor):
     
     #blockstate: LC blockstatemin RC;
     def visitBlockstate(self, ctx: MT22Parser.BlockstateContext):
-        return self.visit(ctx.blockstatemin())
+        return BlockStmt(self.visit(ctx.blockstatemin()))
     
     #blockstatemin: (statement | vardec) blockstatemin |;
     def visitBlockstatemin(self, ctx: MT22Parser.BlockstateminContext):
-        if ctx.getChildCount() == 0: return []
-        elif ctx.vardec(): return [self.visit(ctx.vardec())] + self.visit(ctx.blockstatemin())
+        if ctx.getChildCount() == 0: return ([])
+        elif ctx.vardec(): return self.visit(ctx.vardec()) + self.visit(ctx.blockstatemin())
         elif ctx.statement(): return [self.visit(ctx.statement())] + self.visit(ctx.blockstatemin())
         
     #statement: ifstate | forstate | dowhilestate | whilestate | breakstate | continuestate | returnstate | funcall | assignstate | blockstate;
@@ -109,7 +127,7 @@ class ASTGeneration(MT22Visitor):
         elif ctx.exprindex(): return self.visit(ctx.exprindex())
     
     #scalarvar: IDENTIFIER;
-    def visitScalar(self, ctx: MT22Parser.ScalarContext):
+    def visitScalarvar(self, ctx: MT22Parser.ScalarvarContext):
         return Id(ctx.IDENTIFIER().getText())
     
     #assignstate: lhs ASSIGNOP expr SEMICOLON;
@@ -124,7 +142,7 @@ class ASTGeneration(MT22Visitor):
     
     #forstate: FOR LP lhs ASSIGNOP expr COMMA expr COMMA expr RP statement;
     def visitForstate(self, ctx: MT22Parser.ForstateContext):
-        return ForStmt(self.visit(ctx.lhs()), self.visit(ctx.expr(0)), self.visit(ctx.expr(1)), self.visit(ctx.expr(2)), self.visit(ctx.statement()))
+        return ForStmt(AssignStmt(self.visit(ctx.lhs()), self.visit(ctx.expr(0))), self.visit(ctx.expr(1)), self.visit(ctx.expr(2)), self.visit(ctx.statement()))
     
     #whilestate: WHILE LP expr RP statement;
     def visitWhilestate(self, ctx: MT22Parser.WhilestateContext):
@@ -132,24 +150,24 @@ class ASTGeneration(MT22Visitor):
     
     #dowhilestate: DO blockstate WHILE LP expr RP SEMICOLON;
     def visitDowhilestate(self, ctx: MT22Parser.DowhilestateContext):
-        return DowhileStmt(self.visit(ctx.expr()), self.visit(ctx.blockstate()))
+        return DoWhileStmt(self.visit(ctx.expr()), self.visit(ctx.blockstate()))
     
     #breakstate: BREAK SEMICOLON;
-    def visitBreakState(self, ctx: MT22Parser.BreakStateContext):
+    def visitBreakstate(self, ctx: MT22Parser.BreakstateContext):
         return BreakStmt()
     
     #continuestate: CONTINUE SEMICOLON;
-    def visitContinueState(self, ctx: MT22Parser.ContinueStateContext):
+    def visitContinuestate(self, ctx: MT22Parser.ContinuestateContext):
         return ContinueStmt()
     
     #returnstate: RETURN expr? SEMICOLON;
-    def visitReturnState(self, ctx: MT22Parser.ReturnStateContext):
+    def visitReturnstate(self, ctx: MT22Parser.ReturnstateContext):
         if ctx.expr(): return ReturnStmt(self.visit(ctx.expr()))
-        else: return ReturnStmt(None)
+        return ReturnStmt(None)
         
     #funcall: IDENTIFIER LP exprlist RP SEMICOLON;
-    def visitFunctioncall(self, ctx: MT22Parser.FunctioncallContext):
-        return CallStmt(Id(ctx.IDENTIFIER().getText()), self.visit(ctx.exprlist()))
+    def visitFuncall(self, ctx: MT22Parser.FuncallContext):
+        return CallStmt((ctx.IDENTIFIER().getText()), self.visit(ctx.exprlist()))
     
     #arraytype: ARRAY LS dimensions RS OF atomictype;
     def visitArraytype(self, ctx: MT22Parser.ArraytypeContext):
@@ -162,17 +180,22 @@ class ASTGeneration(MT22Visitor):
     
     #atomictype: INTEGER | BOOLEAN | FLOAT | STRING;
     def visitAtomictype(self, ctx: MT22Parser.AtomictypeContext):
-        if ctx.INTEGER(): return IntType()
+        if ctx.INTEGER(): return IntegerType()
         elif ctx.BOOLEAN(): return BooleanType()
         elif ctx.FLOAT(): return FloatType()
         elif ctx.STRING(): return StringType()
     
     #literal: INTLIT | BOOLLIT | STRINGLIT | FLOATLIT | arraylit;
-    def visitLiterals(self, ctx: MT22Parser.LiteralsContext):
-        if ctx.INTLIT(): return IntLiteral(int(ctx.INTLIT().getText()))
-        elif ctx.BOOLLIT(): return BooleanLiteral(ctx.BOOLLIT().getText() == "true")
-        elif ctx.STRINGLIT(): return StringLiteral(ctx.STRINGLIT().getText())
-        elif ctx.FLOATLIT(): return FloatLiteral(float(ctx.FLOATLIT().getText()))
+    def visitLiteral(self, ctx: MT22Parser.LiteralContext):
+        if ctx.INTLIT(): return IntegerLit(int(ctx.INTLIT().getText()))
+        elif ctx.BOOLLIT(): return BooleanLit(ctx.BOOLLIT().getText() == "true")
+        elif ctx.STRINGLIT(): return StringLit(ctx.STRINGLIT().getText())
+        elif ctx.FLOATLIT(): 
+            floatLit =  ctx.FLOATLIT().getText()
+            if floatLit[0] == '.': 
+                if floatLit[1] == 'e' or floatLit[1] == 'E': return FloatLit(float('0.0'))
+                return FloatLit(float(floatLit))
+            return FloatLit(float(ctx.FLOATLIT().getText()))
         elif ctx.arraylit(): return self.visit(ctx.arraylit())
     
     #arraylit: '{' (exprlist | emptycurl) '}';
@@ -183,50 +206,46 @@ class ASTGeneration(MT22Visitor):
     #expr: expr1 (STRINGOP) expr1 | expr1;
     def visitExpr(self, ctx: MT22Parser.ExprContext):
         if ctx.getChildCount() == 1: return self.visit(ctx.expr1(0))
-        return BinExp(ctx.STRINGOP().getText(), self.visit(ctx.expr1(0)), self.visit(ctx.expr1(1)))
+        return BinExpr(ctx.STRINGOP().getText(), self.visit(ctx.expr1(0)), self.visit(ctx.expr1(1)))
     
     #expr1: expr2 (GTOP | LTOP | GTEOP | LTEOP | EQOP | NEOP) expr2 | expr2;
     def visitExpr1(self, ctx: MT22Parser.Expr1Context):
         if ctx.getChildCount() == 1: return self.visit(ctx.expr2(0))
-        return BinExp(ctx.getChild(1).getText(), self.visit(ctx.expr2(0)), self.visit(ctx.expr2(1)))
+        return BinExpr(ctx.getChild(1).getText(), self.visit(ctx.expr2(0)), self.visit(ctx.expr2(1)))
     
     #expr2: expr2 (ANDOP | OROP) expr3 | expr3;
     def visitExpr2(self, ctx: MT22Parser.Expr2Context):
-        if ctx.getChildCount() == 1: return self.visit(ctx.expr3(0))
-        return BinExp(ctx.getChild(1).getText(), self.visit(ctx.expr2(0)), self.visit(ctx.expr3(1)))
+        if ctx.getChildCount() == 1: return self.visit(ctx.expr3())
+        return BinExpr(ctx.getChild(1).getText(), self.visit(ctx.expr2()), self.visit(ctx.expr3()))
     
     #expr3: expr3 (ADDOP | SUBOP) expr4 | expr4;
     def visitExpr3(self, ctx: MT22Parser.Expr3Context):
-        if ctx.getChildCount() == 1: return self.visit(ctx.expr4(0))
-        return BinExp(ctx.getChild(1).getText(), self.visit(ctx.expr3(0)), self.visit(ctx.expr4(1)))
+        if ctx.getChildCount() == 1: return self.visit(ctx.expr4())
+        return BinExpr(ctx.getChild(1).getText(), self.visit(ctx.expr3()), self.visit(ctx.expr4()))
     
     #expr4: expr4 (MULOP | DIVOP | MODOP) expr5 | expr5;
     def visitExpr4(self, ctx: MT22Parser.Expr4Context):
-        if ctx.getChildCount() == 1: return self.visit(ctx.expr5(0))
-        return BinExp(ctx.getChild(1).getText(), self.visit(ctx.expr4(0)), self.visit(ctx.expr5(1)))
+        if ctx.getChildCount() == 1: return self.visit(ctx.expr5())
+        return BinExpr(ctx.getChild(1).getText(), self.visit(ctx.expr4()), self.visit(ctx.expr5()))
     
     #expr5: (NOTOP) expr5 | expr6;
     def visitExpr5(self, ctx: MT22Parser.Expr5Context):
         if ctx.getChildCount() == 1: return self.visit(ctx.expr6())
-        return UnExp(ctx.NOTOP().getText(), self.visit(ctx.expr5()))
+        return UnExpr(ctx.NOTOP().getText(), self.visit(ctx.expr5()))
     
     #expr6: (SUBOP) expr6 | expr7;
     def visitExpr6(self, ctx: MT22Parser.Expr6Context):
         if ctx.getChildCount() == 1: return self.visit(ctx.expr7())
-        return UnExp(ctx.SUBOP().getText(), self.visit(ctx.expr6()))
+        return UnExpr(ctx.SUBOP().getText(), self.visit(ctx.expr6()))
     
-    #expr7: NTLIT | FLOATLIT | BOOLLIT | STRINGLIT | IDENTIFIER | exprindex | (IDENTIFIER LP exprlist RP) | (LP expr RP) | arraylit;
+    #expr7: IDENTIFIER | literal | exprindex | (IDENTIFIER LP exprlist RP) | (LP expr RP);
     def visitExpr7(self, ctx: MT22Parser.Expr7Context):
-        if ctx.NTLIT(): return IntLiteral(int(ctx.NTLIT().getText()))
-        elif ctx.FLOATLIT(): return FloatLiteral(float(ctx.FLOATLIT().getText()))
-        elif ctx.BOOLLIT(): return BooleanLiteral(ctx.BOOLLIT().getText() == "true")
-        elif ctx.STRINGLIT(): return StringLiteral(ctx.STRINGLIT().getText())
-        elif ctx.IDENTIFIER(): return Id(ctx.IDENTIFIER().getText())
+        if ctx.literal(): return self.visit(ctx.literal())
         elif ctx.exprindex(): return self.visit(ctx.exprindex())
-        elif ctx.getChildCount() == 4: return CallExpr(Id(ctx.IDENTIFIER().getText()), self.visit(ctx.exprlist()))
         elif ctx.getChildCount() == 3: return self.visit(ctx.expr())
-        elif ctx.arraylit(): return self.visit(ctx.arraylit())
+        elif ctx.getChildCount() == 4: return FuncCall((ctx.IDENTIFIER().getText()), self.visit(ctx.exprlist()))
+        else: return Id((ctx.IDENTIFIER().getText()))
         
-    #exprindex: IDENTIFIER LS exprlist RS;
+    #exprindex: IDENTIFIER LS subexprlist RS;
     def visitExprindex(self, ctx: MT22Parser.ExprindexContext):
-        return ArrayCell(Id(ctx.IDENTIFIER().getText()), self.visit(ctx.exprlist()))
+        return ArrayCell((ctx.IDENTIFIER().getText()), self.visit(ctx.subexprlist()))

@@ -1,0 +1,10 @@
+fact: function integer (n: integer) {
+            do {
+                while (i + (2 + 3) < 1) {
+                        for (i = 1, i < (10 + 1), i+1) {
+                            print("Hello World");
+                        }
+                    }
+            }
+            while (n == 10);
+            }

@@ -1,0 +1,8 @@
+main: function integer (x: integer, y: float, z: auto) {
+                if (y ==  34)
+                {
+                x = 1*2!4;
+                a: array [5,1] of integer;
+                }
+                else return y; 
+                }

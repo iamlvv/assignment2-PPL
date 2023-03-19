@@ -1,0 +1,3 @@
+Program([
+	FuncDecl(nestedLoop, ArrayType([2, 3], StringType), [Param(n, IntegerType)], None, BlockStmt([WhileStmt(BinExpr(==, BinExpr(%, Id(y), IntegerLit(3)), IntegerLit(0)), BlockStmt([ForStmt(AssignStmt(Id(i), IntegerLit(3)), BinExpr(<, Id(i), IntegerLit(12)), Id(i), BlockStmt([WhileStmt(BooleanLit(True), AssignStmt(Id(n), BooleanLit(False)))]))]))]))
+])

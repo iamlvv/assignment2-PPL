@@ -1,0 +1,1 @@
+hkt:array[3_6,d12] of float = {1,{5.6e-34},4};

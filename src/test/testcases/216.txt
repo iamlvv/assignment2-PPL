@@ -1,0 +1,9 @@
+fact: function integer (n: integer) {
+            while (i < 1) {
+                for (i = 0, i < 10, i+1) {
+                    break;
+                    continue;
+                    return i == 1;
+                }
+            }
+            }

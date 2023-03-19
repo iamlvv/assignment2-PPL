@@ -1,0 +1,1 @@
+dope : array[3,10_2] of string = {1,{5.6e-34},4};

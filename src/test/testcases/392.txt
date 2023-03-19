@@ -1,0 +1,4 @@
+ sendFile: function void(file: string, path: string) {
+                sendFile(path::("//"::file));
+                return path::("//"::file);
+                } 

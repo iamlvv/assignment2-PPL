@@ -1,0 +1,3 @@
+Program([
+	VarDecl(__C__, ArrayType([7], FloatType), FuncCall(germanyTOM, [ArrayCell(jK, [BinExpr(::, StringLit(), ArrayLit([StringLit()]))])]))
+])

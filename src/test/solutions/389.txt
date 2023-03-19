@@ -1,0 +1,3 @@
+Program([
+	FuncDecl(control, VoidType, [], Mixi, BlockStmt([BreakStmt(), ContinueStmt(), ReturnStmt()]))
+])

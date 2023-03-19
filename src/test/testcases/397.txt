@@ -1,0 +1,6 @@
+fact: function integer (n: integer) {
+            {
+                /* x: string; */
+                func: integer = /*0*/123;
+            }
+            }

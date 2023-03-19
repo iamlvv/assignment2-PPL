@@ -1,0 +1,5 @@
+main: function void() {
+                for (id = 7., 0.3, --1)
+                    for (min = 0, min && 9 > 2, false)
+                        break;
+                }

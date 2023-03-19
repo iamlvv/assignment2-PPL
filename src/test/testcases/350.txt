@@ -1,0 +1,7 @@
+
+        x: array [2] of float;
+        a: function integer (inherit out abc: integer) {
+            x = 11;
+            b[c[2==2]]=4;
+            foo(x);
+        }

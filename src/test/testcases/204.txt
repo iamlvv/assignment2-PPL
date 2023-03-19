@@ -1,1 +1,2 @@
-main: function void () {}
+x, y, z, abc_23: integer = 65, 1;
+        

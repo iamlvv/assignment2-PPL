@@ -1,0 +1,3 @@
+_45_0: function auto () {
+                return arr[5_6,1.];
+                }

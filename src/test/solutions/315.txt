@@ -1,0 +1,3 @@
+Program([
+	FuncDecl(_45_0, AutoType, [], None, BlockStmt([ReturnStmt(ArrayCell(arr, [IntegerLit(56), FloatLit(1.0)]))]))
+])

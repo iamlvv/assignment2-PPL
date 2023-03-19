@@ -1,0 +1,8 @@
+_45_0: function auto () {
+                return arr[5_6,1.];
+                do {
+                    helloworld(2);
+                }
+                while (n * 2 == 1);
+                while (1) if (x == 0) else break;
+                }

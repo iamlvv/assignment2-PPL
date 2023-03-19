@@ -1,0 +1,5 @@
+Program([
+	VarDecl(x, AutoType)
+	FuncDecl(a, IntegerType, [InheritOutParam(n, IntegerType)], None, BlockStmt([IfStmt(BinExpr(==, Id(n), IntegerLit(0)), ReturnStmt(IntegerLit(1)), ReturnStmt(BinExpr(*, Id(n), FuncCall(a, [BinExpr(-, Id(n), IntegerLit(1))]))))]))
+	FuncDecl(main, VoidType, [Param(x, IntegerType)], None, BlockStmt([AssignStmt(Id(x), IntegerLit(11)), CallStmt(foo, Id(x))]))
+])

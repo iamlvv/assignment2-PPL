@@ -1,0 +1,17 @@
+x: integer;
+        fact: function integer (n: string)
+        {
+            if(n==0)
+                return 1;
+            else
+                return n * fact(n-1);
+        }
+        t: integer;
+        
+        main: function integer (x: float)
+        {
+            x = 10;
+            printString(x::"Hello"::"World");
+            fact(x);
+        }
+                

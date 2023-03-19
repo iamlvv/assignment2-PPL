@@ -1,0 +1,7 @@
+nestedLoop: function array[2,3] of string(n: integer) {
+                while(y%3 == 0) {
+                    for (i = 3, i < 1_2, i) {
+                        while(true) n = false;
+                    }
+                }
+                }

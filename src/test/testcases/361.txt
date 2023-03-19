@@ -1,0 +1,15 @@
+main: function string (x: array [100] of integer,n: integer, exp: float) {
+                    output: array [100] of integer;
+                    count: array [10] of integer = {0};
+                    i: integer;
+                    for (i = 0, i < n, i+1)
+                        count[(arr[i] / exp) % 10] = count[(arr[i] / exp) % 10] + 1;
+                    for (i = 1, i < 10, i+1)
+                        count[i] = count[i] + count[i-1];
+                    for (i = n-1, i >= 0, i-1)
+                    {
+                        output[count[(arr[i] / exp)%10] - 1] = arr[i];
+                        count[(arr[i] / exp) % 10] = count[(arr[i] / exp) % 10] - 1;
+                    }
+                }
+                

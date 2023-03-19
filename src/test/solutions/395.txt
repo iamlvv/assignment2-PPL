@@ -1,0 +1,3 @@
+Program([
+	FuncDecl(aizza, BooleanType, [Param(bool, BooleanType)], None, BlockStmt([DoWhileStmt(BinExpr(%, BooleanLit(False), BooleanLit(True)), BlockStmt([CallStmt(getGirlFr, BinExpr(::, StringLit(jenny), BinExpr(+, Id(firstName), StringLit( \n))))]))]))
+])

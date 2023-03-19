@@ -1,0 +1,4 @@
+F: function auto() {
+                dict[pair[1]+pair[0]] = 7.e-9/3;
+                return dict[2.];
+                }

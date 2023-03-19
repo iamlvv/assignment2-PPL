@@ -1,0 +1,8 @@
+
+        main: function void (x: integer, a_123: string) {
+            if (1 < (2 < 3)) 
+            {
+                return 1;
+            }
+        }
+        

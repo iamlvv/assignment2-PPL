@@ -1,0 +1,15 @@
+
+        main: function void (x: integer, a_123: string) {
+            i: integer = 150;
+            {
+                {
+                    while () {
+                        return -1;
+                        for (,,) {
+                            writeln();
+                        }
+                    }
+                }
+            }
+        }
+        

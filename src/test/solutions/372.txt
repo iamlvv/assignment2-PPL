@@ -1,0 +1,3 @@
+Program([
+	FuncDecl(non_Assoc1st, StringType, [InheritOutParam(x, ArrayType([2], StringType))], None, BlockStmt([AssignStmt(ArrayCell(x, [IntegerLit(1), IntegerLit(2)]), BinExpr(::, BinExpr(::, StringLit(), Id(concat)), FuncCall(foo, [StringLit(haizz)])))]))
+])

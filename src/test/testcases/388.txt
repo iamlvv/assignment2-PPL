@@ -1,0 +1,7 @@
+UwU: function string(s: float) {
+                i: integer = 0;
+                do {
+                    i = i + 1;
+                    print(i);
+                } while(--i < s);
+                }

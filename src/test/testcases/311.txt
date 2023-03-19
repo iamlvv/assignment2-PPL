@@ -1,0 +1,15 @@
+fact: function integer (n: integer) {
+            if (n == 0) return 1;
+            else return n * fact(n - 1);
+        }
+        inc: function void(out n: integer, delta: integer) {
+            n = n + delta;
+        }
+        main: function void() {
+            delta: integer = fact(3);
+            inc(x, delta);
+            for (i = 0, i < 10, i+1) {
+                writeLn(i);
+            }
+            printInteger(x);
+        }

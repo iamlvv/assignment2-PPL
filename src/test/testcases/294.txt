@@ -1,0 +1,3 @@
+main: function integer (x: integer, y: float, z: auto) {}
+                a_a= !(5>x) && (z!=y);
+                

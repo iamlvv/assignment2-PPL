@@ -1,0 +1,8 @@
+
+foo: function void (inherit a: integer, inherit out b: float) inherit bar {
+    return "hello";
+}
+
+main: function void () {
+     printInteger(4);
+}

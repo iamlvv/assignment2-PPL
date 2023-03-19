@@ -1,0 +1,3 @@
+Program([
+	FuncDecl(VANVY, AutoType, [], None, BlockStmt([WhileStmt(BinExpr(::, ArrayCell(id, [Id(x)]), BinExpr(==, Id(str), IntegerLit(7))), ReturnStmt(ArrayCell(id, [Id(x)])))]))
+])

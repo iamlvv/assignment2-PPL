@@ -1,0 +1,8 @@
+foo: /*comment*/function void (a: integer, b: float) {
+                    i: float = .0E2;
+                    do {
+                        a[i] = b + 1.0;
+                        i=i+1;
+                    }
+                    while (false);
+                }

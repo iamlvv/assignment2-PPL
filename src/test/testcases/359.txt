@@ -1,0 +1,2 @@
+fact: function boolean (x: integer) {
+            return x==10;}

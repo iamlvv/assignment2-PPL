@@ -1,0 +1,5 @@
+main: function void(args: array[2] of string) {
+                if ("jerry"::{"n","tom"})
+                    for (i = 0, i < length, i + 1)
+                        print(letter[i]);
+                }

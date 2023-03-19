@@ -1,0 +1,4 @@
+Program([
+	VarDecl(b, StringType, StringLit(chau))
+	VarDecl(T, StringType, BinExpr(::, Id(str), Id(str)))
+])

@@ -1,0 +1,23 @@
+main: function string (new: array [10] of integer, old: integer) {
+                    size, i, j,p : integer;
+                    size = new - old;
+                    i = 1;
+                    j = size - 1;
+                    p = start[0];
+                    while (true)
+                    {
+                        while (start[i] < p)
+                            if (i == size - 1)
+                                break;
+                        while (start[j] > p)
+                            if (j == 0)
+                                break;
+                        if (i >= j) 
+                            break;
+                        swap(start[i], start[j]);
+                        //THis is the comment 
+                    }
+                    swap(start[0], start[j]);
+                    return start[j];
+                };
+                

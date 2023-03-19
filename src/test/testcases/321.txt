@@ -1,0 +1,1 @@
+avg: float = (a + b + c2)/3;

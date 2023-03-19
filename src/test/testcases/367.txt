@@ -1,0 +1,11 @@
+main: function integer (a: array [2] of integer, b: integer)
+        {
+            i: integer =0;
+            while (a[i] > b)
+            {
+                writeln(a[i]);
+                i = i + 1;
+            }
+                    
+        }
+                

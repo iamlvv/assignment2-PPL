@@ -1,0 +1,5 @@
+fact: function integer (n: integer) {
+            if (n == 0) return 1;
+            // else return 1.3e-4 * fact(n - 1);
+            else return;
+        }

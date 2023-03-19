@@ -1,0 +1,3 @@
+Program([
+	FuncDecl(getName, StringType, [InheritOutParam(x, ArrayType([21, 8], FloatType))], None, BlockStmt([ReturnStmt()]))
+])

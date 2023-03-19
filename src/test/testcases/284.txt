@@ -1,0 +1,3 @@
+main: function float(x: array[] of integer) {
+                if (2<3) return a[x[y]];
+                }

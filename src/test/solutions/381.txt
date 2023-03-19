@@ -1,0 +1,3 @@
+Program([
+	FuncDecl(nestedIf, BooleanType, [Param(bool, BooleanType)], None, BlockStmt([IfStmt(BooleanLit(True), IfStmt(BinExpr(==, IntegerLit(10), BinExpr(+, IntegerLit(4), IntegerLit(5))), AssignStmt(Id(UwU), BinExpr(::, Id(U), Id(U))), CallStmt(print, Id(UwU))), BlockStmt([]))]))
+])

@@ -1,0 +1,1 @@
+x:array[3_6,0] of integer = {1,2,4};

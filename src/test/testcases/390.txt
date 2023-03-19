@@ -1,0 +1,4 @@
+sum: integer = 0;
+                avg: float = 0.0;
+                grade: array[1] of integer = {8.e3, 9, 0, -6};
+                

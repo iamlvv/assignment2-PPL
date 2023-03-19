@@ -1,0 +1,5 @@
+aizza: function boolean(bool: boolean) {
+                do {
+                    getGirlFr("jenny"::firstName+" \n");
+                } while (false % true);
+                }

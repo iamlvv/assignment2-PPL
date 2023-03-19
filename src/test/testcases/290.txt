@@ -1,0 +1,9 @@
+main: function integer (arr: array [2550] of float, n: integer){
+                res: integer;
+                    res = arr[0];
+                    for (i = 1, i < n, 1)
+                        if (arr[i] > res)
+                            res = arr[i];
+                    return res;
+                }
+                

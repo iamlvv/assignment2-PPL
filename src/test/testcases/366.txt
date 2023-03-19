@@ -1,0 +1,17 @@
+x: integer;
+        fact: function integer (n: integer)
+        {
+            if(n==0)
+                return 1;
+            else
+                return n* fact(n-1);
+        }
+        /*
+        comment
+        */
+        main: function integer (x: integer)
+        {
+            x = 10;
+            fact(x);
+        }
+        
