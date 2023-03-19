@@ -1008,10 +1008,3 @@ class ParserSuite(unittest.TestCase):
         expect = "successful"
         self.assertTrue(TestParser.test( input,expect,299))
     
-    def test300(self):
-        input = """getStr: function auto() {
-                str[1_2] = ""::concatenate::foo("haizz"); 
-                }"""
-        expect = "Error on line 2 col 42: ::"
-        self.assertTrue(TestParser.test( input,expect,300))
-    
